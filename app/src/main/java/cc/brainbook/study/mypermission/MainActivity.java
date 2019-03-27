@@ -105,15 +105,27 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case ACTION_APPLICATION_DETAILS_SETTINGS_REQUEST_CODE:
-                ///刷新本页面
-                recreate();// 直接调用Activity的recreate()方法重启Activity
+                ///刷新当前页面
+                refresh();
                 break;
             case ACTION_WIFI_SETTINGS_REQUEST_CODE:
-                ///刷新本页面
-                recreate();// 直接调用Activity的recreate()方法重启Activity
+                ///刷新当前页面
+                refresh();
                 break;
 
         }
+    }
+
+    /**
+     * 刷新当前页面
+     *
+     * 注意：尽量不用recreate()！因为存在闪屏现象
+     * https://stackoverflow.com/questions/2486934/programmatically-relaunch-recreate-an-activity/23989089
+     */
+    private void refresh() {
+        startActivity(getIntent());
+        finish();
+        overridePendingTransition(0, 0);
     }
 
     ///[Android M 6.0 (API level 23)及以上版本必须动态设置权限]
